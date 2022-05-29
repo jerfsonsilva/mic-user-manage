@@ -1,4 +1,4 @@
-service: mic-base
+service: mic-user-manage
 
 frameworkVersion: '3'
 
@@ -23,7 +23,7 @@ provider:
           Resource: 
             - "arn:aws:s3:::*"
   environment:
-    prefixApp: MIC-BASE
+    prefixApp: MIC-USER-MANAGE
     STAGE: ${self:provider.stage}
 
 custom:
