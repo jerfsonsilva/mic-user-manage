@@ -1,0 +1,42 @@
+{
+    "version": "2.0",
+    "routeKey": "GET /hello",
+    "rawPath": "/hello",
+    "rawQueryString": "",
+    "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "pt-BR",
+        "content-length": "0",
+        "host": "krfyf9gwv5.execute-api.us-east-2.amazonaws.com",
+        "sec-fetch-dest": "document",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-site": "none",
+        "sec-fetch-user": "?1",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0",
+        "x-amzn-trace-id": "Root=1-629299e2-28ba501d69d51aaf3973f1dc",
+        "x-forwarded-for": "177.137.195.213",
+        "x-forwarded-port": "443",
+        "x-forwarded-proto": "https"
+    },
+    "requestContext": {
+        "accountId": "600217142462",
+        "apiId": "krfyf9gwv5",
+        "domainName": "krfyf9gwv5.execute-api.us-east-2.amazonaws.com",
+        "domainPrefix": "krfyf9gwv5",
+        "http": {
+            "method": "GET",
+            "path": "/hello",
+            "protocol": "HTTP/1.1",
+            "sourceIp": "177.137.195.213",
+            "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0"
+        },
+        "requestId": "S2z7fhCMCYcEPjg=",
+        "routeKey": "GET /hello",
+        "stage": "$default",
+        "time": "28/May/2022:21:53:38 +0000",
+        "timeEpoch": 1653774818936
+    },
+    "isBase64Encoded": false
+}

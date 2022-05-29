@@ -1,0 +1,48 @@
+service: mic-base
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-localstack
+
+provider:
+  name: aws
+  stage: dev
+  runtime: nodejs14.x
+  region: us-east-2
+  memorySize: 256
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 's3:GetObject'
+            - 's3:PutObject'
+            - 's3:DeleteObject'
+            - 's3:DeleteObjectVersion'
+          Resource: 
+            - "arn:aws:s3:::*"
+  environment:
+    prefixApp: MIC-BASE
+    STAGE: ${self:provider.stage}
+
+custom:
+  funcDir: src/functions
+  localstack:
+    debug: true
+    stages:
+      - local
+    host: http://localhost  
+    edgePort: 4566 
+    autostart: false  
+    lambda:
+      mountCode: True
+    docker:
+      sudo: True
+
+functions:
+  hello: ${file(${self:custom.funcDir}/hello/_handlers.yml):hello}
+
+          
+
+    

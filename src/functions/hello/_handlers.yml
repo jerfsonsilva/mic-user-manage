@@ -1,0 +1,8 @@
+hello:
+    handler: ${self:custom.funcDir}/hello/hello.handler
+    environment:
+      bucket: mic-base
+    events:
+      - httpApi:
+          path: /hello
+          method: get
