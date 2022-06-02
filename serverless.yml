@@ -7,27 +7,39 @@ plugins:
 
 provider:
   name: aws
-  stage: dev
+  stage: ${opt:stage, 'dev'}
   runtime: nodejs14.x
   region: us-east-2
   memorySize: 256
+  timeout: 30 # optional, in seconds, default is 6
   iam:
     role:
       statements:
         - Effect: 'Allow'
           Action:
-            - 's3:GetObject'
-            - 's3:PutObject'
-            - 's3:DeleteObject'
-            - 's3:DeleteObjectVersion'
+            - 'secretsmanager:GetSecretValue'
+            - 'secretsmanager:DescribeSecret'
+            - 'secretsmanager:ListSecretVersionIds'
           Resource: 
-            - "arn:aws:s3:::*"
+            - ${ssm:SECRETSMANAGER_RDS_ARN}
   environment:
     prefixApp: MIC-USER-MANAGE
     STAGE: ${self:provider.stage}
+    SECRET_RDS: ${ssm(raw):/aws/reference/secretsmanager/user/prod/mysql}
+  vpc:
+    securityGroupIds:
+    - ${ssm:DB_CONFIG_SECURITY_GROUP_ID}
+    subnetIds:
+    - ${ssm:DB_CONFIG_SUBNET1_ID}
+    - ${ssm:DB_CONFIG_SUBNET2_ID}
+    - ${ssm:DB_CONFIG_SUBNET3_ID}
 
 custom:
   funcDir: src/functions
+  webpackIncludeModules:
+    forceInclude:
+      - mysql
+      - mysql2
   localstack:
     debug: true
     stages:
