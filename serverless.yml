@@ -11,7 +11,7 @@ provider:
   runtime: nodejs14.x
   region: us-east-2
   memorySize: 256
-  timeout: 30 # optional, in seconds, default is 6
+  timeout: 30 
   iam:
     role:
       statements:

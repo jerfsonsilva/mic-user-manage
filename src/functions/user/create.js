@@ -3,8 +3,9 @@ const LoggerService = require('../../services/logger.service')
 const UserRepository = require('../../repositories/user.repository');
 
 module.exports.handler = async(event) => {
-    const log = new LoggerService('Function.hello')
+    const log = new LoggerService('Function.user.create')
     try {
+        //Validations event -> name, email, password
         const userCreated = await UserRepository.create({
             name: "2Jane1",
             email: 'teste',
@@ -13,7 +14,6 @@ module.exports.handler = async(event) => {
         return {
             statusCode: 200,
             body: JSON.stringify({
-                message: "Hello",
                 userCreated
             })
         }
