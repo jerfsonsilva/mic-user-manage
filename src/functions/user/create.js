@@ -1,6 +1,6 @@
 'use strict';
 const LoggerService = require('../../services/logger.service')
-const userService = require('../../services/user.service');
+const userService = require('../../services/user.service')
 
 module.exports.handler = async(event) => {
     const log = new LoggerService('Function.user.create')
@@ -18,7 +18,7 @@ module.exports.handler = async(event) => {
             name,
             email,
             password
-        });
+        })
         return {
             statusCode: 200,
             data: userCreated

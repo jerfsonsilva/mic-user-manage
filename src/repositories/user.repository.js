@@ -10,8 +10,9 @@ class UserRepository {
         await this.init()
         return this.userModelInstance.create({ name, email, password })
     }
-    async update() {
-
+    async update(data) {
+        await this.init()
+        return this.userModelInstance.update(data)
     }
     async delete() {
 
