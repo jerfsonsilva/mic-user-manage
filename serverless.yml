@@ -53,7 +53,7 @@ custom:
       sudo: True
 
 functions:
-  hello: ${file(${self:custom.funcDir}/hello/_handlers.yml):hello}
+  ${file(${self:custom.funcDir}/user/_handlers.yml)}
 
           
 
