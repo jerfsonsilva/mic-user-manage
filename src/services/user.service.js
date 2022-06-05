@@ -1,16 +1,29 @@
 const userRepository = require("../repositories/user.repository");
 const bcrypt = require('bcryptjs');
+const { userErrorCode } = require("../enum/userErrors");
 
 class UserService {
     async create({ name, email, password }) {
+        await userRepository.init()
+        const verifyEmail = await userRepository.findOneByEmail(email)
+
+        if (verifyEmail !== null) throw userErrorCode.emailAlreadyExists
+
         return userRepository.create({
             name,
             email,
             password: await bcrypt.hash(password, 8)
         });
     }
-    async update() {
+    async update(id, { name, email, password }) {
+        await userRepository.init()
+            //Verify if id is valid
+        let data = {}
+        if (name) data.name = name
+        if (email) data.email = email
+        if (password) data.password = await bcrypt.hash(password, 8)
 
+        return userRepository.update(id, data);
     }
     async delete() {
 

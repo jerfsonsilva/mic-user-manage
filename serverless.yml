@@ -4,7 +4,7 @@ frameworkVersion: '3'
 
 plugins:
   - serverless-localstack
-
+  - serverless-offline
 provider:
   name: aws
   stage: ${opt:stage, 'dev'}
@@ -40,6 +40,9 @@ custom:
     forceInclude:
       - mysql
       - mysql2
+  serverless-offline:
+    port: 4000
+    stage: local
   localstack:
     debug: true
     stages:

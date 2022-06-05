@@ -19,6 +19,9 @@
         "deploy": "serverless deploy --stage local",
         "deploy-prod": "serverless deploy --stage production",
         "watch": "nodemon -w src -e '.*' -x 'npm run build'",
-        "start": "npm run deploy && npm run watch"
+        "start": "serverless offline"
+    },
+    "devDependencies": {
+        "serverless-offline": "^8.8.0"
     }
 }

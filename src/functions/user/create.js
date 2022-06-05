@@ -1,47 +1,54 @@
 'use strict';
+const { userErrorCode } = require('../../enum/userErrors');
 const LoggerService = require('../../services/logger.service')
-const userService = require('../../services/user.service')
+const userService = require('../../services/user.service');
+const { response, inputEventHttp } = require('../../util/eventHttp');
 
 module.exports.handler = async(event) => {
     const log = new LoggerService('Function.user.create')
+    const body = inputEventHttp(event)
 
-    const validation = validationInputCreate(event)
-    if (validation.length > 0) {
-        return {
-            statusCode: 400,
-            errors: validation
-        }
+    const validation = validationInputCreate(body)
+
+    if (validation.inputs) {
+        return response(422, validation)
     }
     try {
-        const { name, email, password } = event
-        const userCreated = await userService.create({
+        const { name, email, password } = body
+
+        const user = await userService.create({
             name,
             email,
             password
         })
-        return {
-            statusCode: 200,
-            data: userCreated
-        }
+        return response(200, {
+            user
+        })
     } catch (error) {
         log.info({ msg: 'Error: ', error })
-        return {
-            statusCode: 400,
+        return response(400, {
             error
-        }
+        })
     }
 };
 
 function validationInputCreate(event) {
-    const errors = []
+    const inputs = []
     if (!event.name) {
-        errors.push({ err: "name is required" })
+        inputs.push({ err: "name is required" })
     }
     if (!event.email) {
-        errors.push({ err: "email is required" })
+        inputs.push({ err: "email is required" })
     }
     if (!event.password) {
-        errors.push({ err: "password is required" })
+        inputs.push({ err: "password is required" })
     }
-    return errors
+    if (inputs.length > 0) {
+        return {
+            ...userErrorCode.validationError,
+            inputs
+        }
+    }
+    return {}
+
 }

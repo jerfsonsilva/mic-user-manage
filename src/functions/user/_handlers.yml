@@ -8,7 +8,7 @@ userUpdate:
     handler: ${self:custom.funcDir}/user/update.handler
     events:
       - httpApi:
-          path: /user
+          path: /user/{id}
           method: put
 userDelete:
     handler: ${self:custom.funcDir}/user/delete.handler

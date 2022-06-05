@@ -6,13 +6,20 @@ class UserRepository {
             this.userModelInstance = await userModel()
         }
     }
+    async findOneByEmail(email) {
+        return this.userModelInstance.findOne({
+            where: { email }
+        })
+    }
     async create({ name, email, password }) {
-        await this.init()
         return this.userModelInstance.create({ name, email, password })
     }
-    async update(data) {
-        await this.init()
-        return this.userModelInstance.update(data)
+    async update(id, data) {
+        return this.userModelInstance.update(data, {
+            where: {
+                id
+            }
+        })
     }
     async delete() {
 
