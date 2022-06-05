@@ -1,22 +1,32 @@
 'use strict';
-const LoggerService = require('../../services/logger.service')
-const UserRepository = require('../../repositories/user.repository');
+const { userErrorCode } = require('../../enum/userErrors');
+const LoggerService = require('../../services/logger.service');
+const userService = require('../../services/user.service');
+const {
+    paramEventHttp,
+    inputEventHttp,
+    response,
+} = require('../../util/eventHttp');
 
 module.exports.handler = async(event) => {
-    const log = new LoggerService('Function.user.update')
+    const log = new LoggerService('Function.user.update');
+    const { id } = paramEventHttp(event);
+    const body = inputEventHttp(event);
     try {
+        const { name, email, password } = body;
+        const user = await userService.update(id, {
+            name,
+            email,
+            password,
+        });
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                userCreated
-            })
-        }
+        if (!user) throw userErrorCode.userNotUpdated;
+
+        return response(200);
     } catch (error) {
-        log.info({ msg: 'Error: Hello:', error })
-        return {
-            statusCode: 400,
+        log.info({ msg: 'Error: ', error });
+        return response(400, {
             error
-        }
+        });
     }
 };

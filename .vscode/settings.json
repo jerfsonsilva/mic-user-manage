@@ -6,5 +6,16 @@
     "eslint.validate": [
         { "language": "javascript", "autoFix": true }
     ],
-     "eslint.workingDirectories": ["./src"],
+    "eslint.workingDirectories": [
+        "./src"
+    ],
+    "eslint.lintTask.enable": true,
+    "javascript.format.enable": true,
+    "javascript.format.insertSpaceAfterCommaDelimiter": true,
+    "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+    "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
+    "javascript.format.insertSpaceAfterConstructor": true,
+    "editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
 }

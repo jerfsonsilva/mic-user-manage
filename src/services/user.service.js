@@ -1,12 +1,11 @@
-const userRepository = require("../repositories/user.repository");
+const userRepository = require('../repositories/user.repository');
 const bcrypt = require('bcryptjs');
-const { userErrorCode } = require("../enum/userErrors");
+const { userErrorCode } = require('../enum/userErrors');
 
 class UserService {
     async create({ name, email, password }) {
         await userRepository.init()
         const verifyEmail = await userRepository.findOneByEmail(email)
-
         if (verifyEmail !== null) throw userErrorCode.emailAlreadyExists
 
         return userRepository.create({
@@ -17,7 +16,10 @@ class UserService {
     }
     async update(id, { name, email, password }) {
         await userRepository.init()
-            //Verify if id is valid
+
+        const verifyId = await userRepository.findOneById(id)
+        if (verifyId === null) throw userErrorCode.userNotFound
+
         let data = {}
         if (name) data.name = name
         if (email) data.email = email
@@ -25,8 +27,9 @@ class UserService {
 
         return userRepository.update(id, data);
     }
-    async delete() {
-
+    async delete(id) {
+        await userRepository.init()
+        return userRepository.delete(id)
     }
 }
-module.exports = new UserService()
+module.exports = new UserService();

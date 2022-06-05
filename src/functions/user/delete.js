@@ -1,22 +1,22 @@
 'use strict';
-const LoggerService = require('../../services/logger.service')
-const UserRepository = require('../../repositories/user.repository');
+const { userErrorCode } = require('../../enum/userErrors');
+const LoggerService = require('../../services/logger.service');
+const userService = require('../../services/user.service');
+const {
+    paramEventHttp,
+    response
+} = require('../../util/eventHttp');
 
 module.exports.handler = async(event) => {
-    const log = new LoggerService('Function.user.delete')
+    const log = new LoggerService('Function.user.delete');
+    const { id } = paramEventHttp(event);
     try {
-
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                userCreated
-            })
-        }
+        await userService.delete(id);
+        return response(200);
     } catch (error) {
-        log.info({ msg: 'Error: Hello:', error })
-        return {
-            statusCode: 400,
+        log.info({ msg: 'Error: ', error });
+        return response(400, {
             error
-        }
+        });
     }
 };

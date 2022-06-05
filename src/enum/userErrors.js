@@ -7,5 +7,13 @@ module.exports.userErrorCode = {
         codeError: 'validationError',
         msg: 'Error in validation',
         inputs: []
+    },
+    userNotFound: {
+        codeError: 'userNotFound',
+        msg: 'User not found'
+    },
+    userNotUpdated: {
+        codeError: 'userNotUpdated',
+        msg: 'User not updated'
     }
 }
