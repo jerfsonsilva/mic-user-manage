@@ -32,5 +32,12 @@ class UserRepository {
 
         return verifyId.destroy()
     }
+    async findAll(filters, limit, offset) {
+        return this.userModelInstance.findAndCountAll({
+            where: filters,
+            limit,
+            offset
+        });
+    }
 }
 module.exports = new UserRepository();

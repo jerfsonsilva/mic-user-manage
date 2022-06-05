@@ -12,6 +12,7 @@ module.exports.handler = async(event) => {
     const log = new LoggerService('Function.user.update');
     const { id } = paramEventHttp(event);
     const body = inputEventHttp(event);
+
     try {
         const { name, email, password } = body;
         const user = await userService.update(id, {

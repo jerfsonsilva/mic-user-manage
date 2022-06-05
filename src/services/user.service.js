@@ -2,6 +2,8 @@ const userRepository = require('../repositories/user.repository');
 const bcrypt = require('bcryptjs');
 const { userErrorCode } = require('../enum/userErrors');
 
+const pageSize = 5;
+
 class UserService {
     async create({ name, email, password }) {
         await userRepository.init()
@@ -30,6 +32,11 @@ class UserService {
     async delete(id) {
         await userRepository.init()
         return userRepository.delete(id)
+    }
+    async findAll(filters, page) {
+        await userRepository.init()
+        const offset = (page - 1) * pageSize
+        return userRepository.findAll(filters, pageSize, offset)
     }
 }
 module.exports = new UserService();

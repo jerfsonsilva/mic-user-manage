@@ -1,5 +1,4 @@
 'use strict';
-const { userErrorCode } = require('../../enum/userErrors');
 const LoggerService = require('../../services/logger.service');
 const userService = require('../../services/user.service');
 const {

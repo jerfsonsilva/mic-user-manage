@@ -20,5 +20,5 @@ userFindAll:
     handler: ${self:custom.funcDir}/user/findAll.handler
     events:
       - httpApi:
-          path: /user
+          path: /users
           method: get

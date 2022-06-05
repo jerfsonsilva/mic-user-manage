@@ -1,14 +1,16 @@
 module.exports.inputEventHttp = (event) => {
-    return JSON.parse(event.body) || []
+    return JSON.parse(event.body) || [];
 }
-
+module.exports.queryEventHttp = (event) => {
+    return event.queryStringParameters || [];
+}
 module.exports.paramEventHttp = (event) => {
-    return event.pathParameters
+    return event.pathParameters;
 }
 
 module.exports.response = (statusCode, body) => {
     return {
         statusCode,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
     }
 }

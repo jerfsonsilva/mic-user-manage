@@ -1,22 +1,27 @@
 'use strict';
-const LoggerService = require('../../services/logger.service')
-const UserRepository = require('../../repositories/user.repository');
+const { Op } = require('sequelize');
+const LoggerService = require('../../services/logger.service');
+const userService = require('../../services/user.service');
+const { response, queryEventHttp } = require('../../util/eventHttp');
 
 module.exports.handler = async(event) => {
-    const log = new LoggerService('Function.user.findAll')
+    const log = new LoggerService('Function.user.findAll');
+    const query = queryEventHttp(event);
     try {
+        const params = {}
+        if (query.name) params.name = {
+            [Op.like]: `%${query.name}%`
+        }
+        if (query.email) params.email = query.email;
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                userCreated
-            })
-        }
+        const page = query.page || 1;
+
+        const list = await userService.findAll(params, page);
+        return response(200, list);
     } catch (error) {
-        log.info({ msg: 'Error: Hello:', error })
-        return {
-            statusCode: 400,
+        log.info({ msg: 'Error: ', error });
+        return response(400,
             error
-        }
+        );
     }
 };
