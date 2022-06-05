@@ -1,6 +1,6 @@
 # Welcome to Mic-user-manage
 ## description
-That microservice was made to manager user
+That microservice was made to manage user
 
 ## Frameworks used
 
