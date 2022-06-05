@@ -1,11 +1,11 @@
 'use strict';
 const { userErrorCode } = require('../../enum/userErrors');
-const LoggerService = require('../../services/logger.service');
+const loggerService = require('../../services/logger.service');
 const userService = require('../../services/user.service');
 const { response, inputEventHttp } = require('../../util/eventHttp');
 
 module.exports.handler = async(event) => {
-    const log = new LoggerService('Function.user.create');
+    const log = new loggerService('Function.user.create');
     const body = inputEventHttp(event);
 
     const validation = validationInputCreate(body);
@@ -22,7 +22,7 @@ module.exports.handler = async(event) => {
             password,
         });
         return response(200, {
-            user,
+            user
         });
     } catch (error) {
         log.info({ msg: 'Error: ', error });

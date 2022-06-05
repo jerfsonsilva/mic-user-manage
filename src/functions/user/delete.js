@@ -1,5 +1,5 @@
 'use strict';
-const LoggerService = require('../../services/logger.service');
+const loggerService = require('../../services/logger.service');
 const userService = require('../../services/user.service');
 const {
     paramEventHttp,
@@ -7,7 +7,7 @@ const {
 } = require('../../util/eventHttp');
 
 module.exports.handler = async(event) => {
-    const log = new LoggerService('Function.user.delete');
+    const log = new loggerService('Function.user.delete');
     const { id } = paramEventHttp(event);
     try {
         await userService.delete(id);

@@ -1,11 +1,11 @@
 'use strict';
 const { Op } = require('sequelize');
-const LoggerService = require('../../services/logger.service');
+const loggerService = require('../../services/logger.service');
 const userService = require('../../services/user.service');
 const { response, queryEventHttp } = require('../../util/eventHttp');
 
 module.exports.handler = async(event) => {
-    const log = new LoggerService('Function.user.findAll');
+    const log = new loggerService('Function.user.findAll');
     const query = queryEventHttp(event);
     try {
         const params = {}
