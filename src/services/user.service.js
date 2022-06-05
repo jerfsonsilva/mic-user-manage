@@ -1,6 +1,6 @@
-const userRepository = require('../repositories/user.repository');
-const bcrypt = require('bcryptjs');
-const { userErrorCode } = require('../enum/userErrors');
+const userRepository = require("../repositories/user.repository");
+const bcrypt = require("bcryptjs");
+const { userErrorCode } = require("../enum/userErrors");
 
 const pageSize = 5;
 
