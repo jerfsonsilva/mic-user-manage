@@ -15,7 +15,6 @@ module.exports.handler = async(event) => {
         if (query.email) params.email = query.email;
 
         const page = query.page || 1;
-
         const list = await userService.findAll(params, page);
         return response(200, list);
     } catch (error) {

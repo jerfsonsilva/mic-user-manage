@@ -7,7 +7,6 @@ module.exports.queryEventHttp = (event) => {
 module.exports.paramEventHttp = (event) => {
     return event.pathParameters;
 }
-
 module.exports.response = (statusCode, body) => {
     return {
         statusCode,
