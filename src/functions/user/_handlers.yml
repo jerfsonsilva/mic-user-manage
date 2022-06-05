@@ -4,21 +4,25 @@ userCreate:
       - httpApi:
           path: /user
           method: post
+          authorizer: aws_iam
 userUpdate:
     handler: ${self:custom.funcDir}/user/update.handler
     events:
       - httpApi:
           path: /user/{id}
           method: put
+          authorizer: aws_iam
 userDelete:
     handler: ${self:custom.funcDir}/user/delete.handler
     events:
       - httpApi:
           path: /user/{id}
           method: delete
+          authorizer: aws_iam
 userFindAll:
     handler: ${self:custom.funcDir}/user/findAll.handler
     events:
       - httpApi:
           path: /users
           method: get
+          authorizer: aws_iam
